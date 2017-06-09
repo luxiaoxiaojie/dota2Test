@@ -1,0 +1,11 @@
+REPOSITORY_PATH=G://taotao//upload
+IMAGE_BASE_URL=http://image.taotao.com
+TAOTAO_MANAGE_URL=http://manage.taotao.com
+INDEX_AD1_URL=/rest/content/?categoryId=64&page=1&rows=6
+INDEX_AD2_URL=/rest/content/?categoryId=69&page=1&rows=6
+API_ITEM_URL=/rest/api/item/
+API_ITEMDSEC_URL=/rest/api/item/desc/
+API_ITEMPARM_URL=/rest/api/item/param/item/
+SSO_TAOTAO_URL=http://sso.taotao.com
+SSO_QUERY_BY_TOKEN=/service/user/query/
+TT_ORDER_URL=http://order.taotao.com

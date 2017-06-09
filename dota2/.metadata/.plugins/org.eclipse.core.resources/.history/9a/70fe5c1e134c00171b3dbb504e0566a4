@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">  
+  
+    <!--扫描包-->  
+    <context:component-scan base-package="com.beauxie"></context:component-scan>  
+      
+    <!-- 配置数据源 -->  
+    <!-- c3p0数据源的bean -->  
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">  
+        <!-- jdbc:mysql://localhost:3306/ssmdemo -->  
+        <!-- 本地数据库可以省略localhost:3306 -->  
+        <property name="jdbcUrl" value="jdbc:mysql:///ssmdemo">  
+        </property>  
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>  
+        <property name="user" value="root"></property>  
+        <property name="password" value="root"></property>  
+          
+        <property name="acquireIncrement" value="3"></property>  
+        <property name="initialPoolSize" value="10"></property>  
+        <property name="minPoolSize" value="2"></property>  
+        <property name="maxPoolSize" value="10"></property>  
+    </bean>  
+      
+    <!-- sqlSessionFactory -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <!-- mybatis的全局配置文件的路径 -->  
+        <property name="configLocation" value="classpath:SqlMapConfig.xml"></property>  
+        <property name="dataSource" ref="dataSource"></property>  
+    </bean>  
+      
+    <!--   
+    mapper批量扫描，从mapper包中扫描出mapper接口，自动创建代理对象。  
+    遵循规范：将mapper.java和mapper.xml映射文件保持文件名一致，并且在同一个包下面  
+    在spring中把自动扫描出来的接口作为bean的id（首字母小写）  
+     -->  
+    <!-- mapper扫描器 -->  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <!-- 指定扫描的包名  
+        如果扫描多个包，每个包中间用逗号分隔  
+         -->  
+        <property name="basePackage" value="com.beauxie.dao"></property>  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+          
+    </bean>  
+</beans>  
